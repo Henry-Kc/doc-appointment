@@ -1,5 +1,5 @@
 import Login from "./Login";
-import SignUp from "../LandingPage/SignUp";
+import SignUp from "./SignUp";
 
 
 

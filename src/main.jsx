@@ -6,10 +6,21 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
+import { AuthProvider } from './contexts/AuthProvider.jsx'
+import { ContextProvider } from './contexts/ContextProvider.jsx'
+import ErrorBoundary from './ErrorBoundary.jsx'
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <AuthProvider>
+        <ContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ContextProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 )

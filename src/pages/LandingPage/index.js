@@ -1,6 +1,6 @@
 
 import DashBoard from "./DashBoard";
-import LandingPage from "../Authentication/LandingPage";
+import LandingPage from "./LandingPage";
 import NoPage from "./NoPage";
 
 

@@ -1,53 +1,71 @@
-import { useState, React } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import eyeOpen from '../../assets/eyeOpen.svg'
 import eyeClose from '../../assets/eyeClose.svg'
 import { supabase } from '../../client'
 
+import { AuthContext } from '../../contexts/AuthProvider';
+
 
 const Login = ({ setToken }) => {
-  const [formData, setformData] = useState({
-    email: '', password: '',
-  })
+  // const [formData, setformData] = useState({
+  //   email: '', password: '',
+  // })
 
-  const [showPass, setshowPass] = useState('password')
-  const passwordHandler = () => (
-    setshowPass(showPass === 'password' ? 'text' : 'password')
-  )
+  // const [showPass, setshowPass] = useState('password')
+  // const passwordHandler = () => (
+  //   setshowPass(showPass === 'password' ? 'text' : 'password')
+  // )
 
-  const navigate = useNavigate() //Declare useNavigate function
+  // const navigate = useNavigate() //Declare useNavigate function
 
-  console.log(formData)
+  // console.log(formData)
 
-  function handleChange(event) {
-    console.log(event.target.name)
-    setformData((prevformData) => {
-      return {
-        ...prevformData,
-        [event.target.name]: event.target.value
-      }
-    })
-  }
+  // function handleChange(event) {
+  //   console.log(event.target.name)
+  //   setformData((prevformData) => {
+  //     return {
+  //       ...prevformData,
+  //       [event.target.name]: event.target.value
+  //     }
+  //   })
+  // }
 
-  async function handleSubmit(e) {
-    console.log(e.preventDefault())
+  // async function handleSubmit(e) {
+  //   console.log(e.preventDefault())
 
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      })
-      if (error) throw error
-      console.log(`${'data'} => `, data)
-      setToken(data),
-        navigate('/dashboard')
+  //   try {
+  //     const { data, error } = await supabase.auth.signInWithPassword({
+  //       email: formData.email,
+  //       password: formData.password,
+  //     })
+  //     if (error) throw error
+  //     console.log(`${'data'} => `, data)
+  //     setToken(data),
+  //       navigate('/dashboard')
 
 
-    } catch (error) {
-      alert(error)
+  //   } catch (error) {
+  //     alert(error)
+  //   }
+  // }
+
+  const { login, showPass, passwordHandler } = useContext(AuthContext);
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setFormData((prevFormData) => ({...prevFormData, [event.target.name]: event.target.value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await login(formData.email, formData.password);
+    if (login) {
+      navigate(`/${role}`); // Redirect to the corresponding dashboard based on the role
     }
-  }
+  };
 
 
   return (
@@ -76,9 +94,9 @@ const Login = ({ setToken }) => {
                         <input
                           type="email"
                           name="email"
+                          value={formData.email}
                           placeholder="Enter email to get started"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-
                           onChange={handleChange}
                         />
                       </div>
@@ -105,26 +123,35 @@ const Login = ({ setToken }) => {
                         <input
                           type={showPass}
                           name="password"
+                          value={formData.password}
                           placeholder="Enter your password"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-
                           onChange={handleChange}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer focus-within:text-gray-600" onClick={passwordHandler}>
                           {showPass === 'password' ? <img src={eyeOpen} alt="" className="w-5 h-5 " /> : <img src={eyeClose} alt="" className="w-5 h-5 " />}
-                          {/* <img src={eyeOpen} alt="" className="w-5 h-5 " /> */}
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <button type="submit" className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-gray-600 border border-transparent rounded-md focus:outline-none hover:bg-gray-800 focus:bg-gray-800">
+                      <button 
+                        type="submit" 
+                        className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-gray-600 border border-transparent rounded-md focus:outline-none hover:bg-gray-800 focus:bg-gray-800"
+                      >
                         Log in
                       </button>
                     </div>
 
                     <div className="text-center">
-                      <p className="text-base text-gray-600"><Link to={'/signup'} className="font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 hover:underline">Create an account</Link></p>
+                      <p className="text-base text-gray-600">
+                        <Link 
+                          to={'/signup'} 
+                          className="font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 hover:underline"
+                        >
+                          Create an account
+                        </Link>
+                      </p>
                       {/* <a href="#" title="" ></a> */}
                     </div>
                   </div>

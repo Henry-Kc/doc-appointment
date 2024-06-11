@@ -1,59 +1,76 @@
-import { React, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import eyeOpen from '../../assets/eyeOpen.svg'
 import eyeClose from '../../assets/eyeClose.svg'
 import { supabase } from '../../client'
 
+import { AuthContext } from '../../contexts/AuthProvider'
+
 
 const SignUp = () => {
 
-  const [formData, setformData] = useState({
-    fullName: '', email: '', password: ''
-  })
+  // const [formData, setformData] = useState({
+  //   fullName: '', email: '', password: ''
+  // })
 
-  const [showPass, setshowPass] = useState('password')
-  const passwordHandler = () => (
-    setshowPass(showPass === 'password' ? 'text' : 'password')
-  )
+  // const [showPass, setshowPass] = useState('password')
 
-  const navigate = useNavigate()
+  // const passwordHandler = () => (
+  //   setshowPass(showPass === 'password' ? 'text' : 'password')
+  // )
 
-  console.log(formData)
+  // const navigate = useNavigate()
 
-  function handleChange(event) {
-    setformData((prevformData) => {
-      return {
-        ...prevformData,
-        // console.log(event.target.name),
-        [event.target.name]: event.target.value
-      }
-    })
-  }
+  // console.log(formData)
 
-  async function handleSubmit(e) {
-    e.preventDefault()
+  // function handleChange(event) {
+  //   setformData((prevformData) => {
+  //     return {
+  //       ...prevformData,
+  //       // console.log(event.target.name),
+  //       [event.target.name]: event.target.value
+  //     }
+  //   })
+  // }
 
-    try {
-      const { data, error } = await supabase.auth.signUp(
-        {
-          email: formData.email,
-          password: formData.password,
-          options: {
-            data: {
-              full_name: formData.fullName,
-            }
-          }
-        }
-      )
-      if (error) throw error
-      console.log(data)
-      alert('Check your email for verification Link')
-      navigate('/login')
-    } catch (error) {
-      alert(error)
-    }
-  }
+  // async function handleSubmit(e) {
+  //   e.preventDefault()
+
+  //   try {
+  //     const { data, error } = await supabase.auth.signUp(
+  //       {
+  //         email: formData.email,
+  //         password: formData.password,
+  //         options: {
+  //           data: {
+  //             full_name: formData.fullName,
+  //           }
+  //         }
+  //       }
+  //     )
+  //     if (error) throw error
+  //     console.log(data)
+  //     alert('Check your email for verification Link')
+  //     navigate('/login')
+  //   } catch (error) {
+  //     alert(error)
+  //   }
+  // }
+
+  const { signup, showPass, passwordHandler } = useContext(AuthContext);
+  const [formData, setFormData] = useState({ fullName: '', email: '', password: '' });
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setFormData((prevFormData) => ({...prevFormData, [event.target.name]: event.target.value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await signup(formData.fullName, formData.email, formData.password);
+    navigate('/login');
+  };
 
   return (
     <div>
@@ -81,6 +98,7 @@ const SignUp = () => {
                         <input
                           type="text"
                           name="fullName"
+                          value={formData.fullName}
                           id=""
                           placeholder="Enter your name"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
@@ -102,6 +120,7 @@ const SignUp = () => {
                         <input
                           type="email"
                           name="email"
+                          value={formData.email}
                           id=""
                           placeholder="Enter email to get started"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
@@ -129,15 +148,18 @@ const SignUp = () => {
                           type={showPass}
                           name="password"
                           id=""
+                          value={formData.password}
                           placeholder="Enter your password"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                           required
                           onChange={handleChange}
                         />
 
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer focus-within:text-gray-600" onClick={passwordHandler}>
+                        <div 
+                          className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer focus-within:text-gray-600" 
+                          onClick={passwordHandler}
+                        >
                           {showPass === 'password' ? <img src={eyeOpen} alt="" className="w-5 h-5 " /> : <img src={eyeClose} alt="" className="w-5 h-5 " />}
-                          {/* <img src={eyeOpen} alt="" className="w-5 h-5 " /> */}
                         </div>
                       </div>
                     </div>
@@ -145,13 +167,26 @@ const SignUp = () => {
 
 
                     <div>
-                      <button type="submit" className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-gray-600 border border-transparent rounded-md focus:outline-none hover:bg-gray-800 focus:bg-gray-800">
+                      <button 
+                        type="submit" 
+                        className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-gray-600 border border-transparent rounded-md focus:outline-none hover:bg-gray-800 focus:bg-gray-800"
+                      >
                         Create account
                       </button>
                     </div>
 
                     <div className="text-center">
-                      <p className="text-base text-gray-600">Already have an account?<Link to={'/login'} className="font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 hover:underline">Login here</Link></p>
+                      <p 
+                        className="text-base text-gray-600"
+                      >
+                        Already have an account?
+                        <Link 
+                          to={'/login'} 
+                          className="font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 hover:underline"
+                        >
+                          Login here
+                        </Link>
+                      </p>
                     </div>
                   </div>
                 </form>
