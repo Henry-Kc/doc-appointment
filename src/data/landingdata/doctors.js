@@ -1,5 +1,5 @@
-import maleDoctor from '../assets/maleDoctor.jpg'
-import femaleDoctor from '../assets/femaleDoctor.svg'
+import maleDoctor from '../../assets/maleDoctor.jpg'
+import femaleDoctor from '../../assets/femaleDoctor.svg'
 
 
 export const doctors = [

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { NavBar, Hero, Doctors, Departments , Footer } from '../components'
+import { NavBar, Hero, Doctors, Departments , Footer } from '../../components/LandingComponent'
 
 const LandingPage = () => {
   return (

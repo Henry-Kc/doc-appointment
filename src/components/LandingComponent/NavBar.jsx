@@ -2,9 +2,9 @@
 import { React, useState } from 'react'
 import { Link, useNavigate, NavLink } from 'react-router-dom'
 
-import lock from '../assets/lock.svg'
-import hamburgerMenu from '../assets/hamburgerMenu.svg'
-import close from '../assets/close.svg'
+import lock from '../../assets/lock.svg'
+import hamburgerMenu from '../../assets/hamburgerMenu.svg'
+import close from '../../assets/close.svg'
 
 const NavBar = () => {
   const [toggle, setToggle] = useState(false)

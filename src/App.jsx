@@ -1,7 +1,8 @@
 import {React, useState, useEffect} from 'react'
 import {Routes, Route} from 'react-router-dom'
 
-import {Login, SignUp, DashBoard, LandingPage, NoPage} from './pages/index' 
+import { DashBoard, LandingPage, NoPage } from './pages/LandingPage' 
+import {Login, SignUp} from './pages/Authentication'
 
 
 const App = () => {

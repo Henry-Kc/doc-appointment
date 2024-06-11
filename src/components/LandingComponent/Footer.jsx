@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, NavLink} from 'react'
+import {Link, NavLink} from 'react-router-dom'
 
 
 const Footer = () => {
@@ -22,15 +22,15 @@ const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="#doctor" title="" className="text-sm transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"> Doctors </a>
+                  <a href="/doctor" title="" className="text-sm transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"> Doctors </a>
                 </li>
 
                 <li>
-                  <a href="#department" title="" className="text-sm transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"> Department </a>
+                  <a href="/department" title="" className="text-sm transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"> Department </a>
                 </li>
 
                 <li>
-                  <a href="#about" title="" className="text-sm transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"> About </a>
+                  <a href="/about" title="" className="text-sm transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"> About </a>
                 </li>
 
                 {/* <li>

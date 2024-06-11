@@ -2,8 +2,8 @@ import React from 'react'
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
 import { Link } from 'react-router-dom'
 
-import { DiffSentence } from '../data/random'
-import heroImg from '../assets/heroImg.svg'
+import { DiffSentence } from '../../data/landingdata/random'
+import heroImg from '../../assets/heroImg.svg'
 import { FaArrowRight } from "react-icons/fa";
 
 // const diffSentence = [

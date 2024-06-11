@@ -1,9 +1,9 @@
 import { useState, React } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import eyeOpen from '../assets/eyeOpen.svg'
-import eyeClose from '../assets/eyeClose.svg'
-import { supabase } from '../client'
+import eyeOpen from '../../assets/eyeOpen.svg'
+import eyeClose from '../../assets/eyeClose.svg'
+import { supabase } from '../../client'
 
 
 const Login = ({ setToken }) => {
