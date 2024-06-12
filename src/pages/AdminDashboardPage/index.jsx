@@ -1,6 +1,6 @@
 
 import Appointments from './Appointments'
-import Dashboard from './Dashboard'
+import AdminDashboard from './AdminDashboard'
 import Departments from './Departments'
 import Doctors from './Doctors'
 import Patients from './Patients'
@@ -8,5 +8,5 @@ import Patients from './Patients'
 
 
 
-export {Appointments, Dashboard, Departments, Doctors, Patients}
+export {Appointments, AdminDashboard, Departments, Doctors, Patients}
 

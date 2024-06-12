@@ -9,16 +9,16 @@ import { useStateContext } from '../../contexts/ContextProvider';
 
 import Appointments from './Appointments';
 
-const Dashboard = ({token}) => {
-  const currentRoute = window.location.pathname; // get the current route
-  console.log(currentRoute)
-  const condition = currentRoute === '/appointments';
+const AdminDashboard = ({token}) => {
+  // const currentRoute = window.location.pathname; // get the current route
+  // console.log(currentRoute)
+  // const condition = currentRoute === '/appointments';
 
-  let navigate = useNavigate()
-  function handleLogout() {
-    sessionStorage.removeItem('token')
-    navigate('/login')
-  }
+  // let navigate = useNavigate()
+  // function handleLogout() {
+  //   sessionStorage.removeItem('token')
+  //   navigate('/login')
+  // }
 
   return (
     <div className="mt-2">
@@ -69,7 +69,7 @@ const Dashboard = ({token}) => {
       </div>
 
       
-        <Link to="/appointments">
+        <Link to="/admin/appointments">
           <Appointments title='List of Appointments' category='' />
         </Link> 
       
@@ -78,4 +78,4 @@ const Dashboard = ({token}) => {
   )
 }
 
-export default Dashboard
+export default AdminDashboard

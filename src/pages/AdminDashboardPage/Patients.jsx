@@ -10,6 +10,7 @@ import {
   PdfExport,
 } from '@syncfusion/ej2-react-grids';
 
+
 import { patientsData, contextMenuItems, patientsGrid } from '../../data/dummy';
 import { Header } from '../../components/AdminDashboardComponent';
 

@@ -44,7 +44,7 @@ const Sidebar = () => {
                 </p>
                 {item.links.map((link) => (
                   <NavLink
-                    to={`/${link.name}`}
+                    to={`/admin/${link.name}`}
                     key={link.name}
                     // style={({ isActive }) => ({
                     //   backgroundColor: isActive ? currentColor : '',

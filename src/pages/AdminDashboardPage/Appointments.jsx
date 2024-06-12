@@ -11,7 +11,7 @@ const Appointments = ({category, title}) => {
 
   const currentRoute = window.location.pathname; // get the current route
   console.log(currentRoute)
-  const condition = currentRoute === '/appointments';
+  const condition = currentRoute === '/admin/appointments';
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -30,7 +30,9 @@ const Appointments = ({category, title}) => {
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           {appointmentsGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
         </ColumnsDirective>
+
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter, Search, Toolbar]} />
+        
       </GridComponent>
     </div>
   );

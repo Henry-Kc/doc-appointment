@@ -19,6 +19,7 @@ export default {
         'secondary-dark-bg': '#33373E',
         'light-gray': '#F7F7F7',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
+        'blue': 'blue'
       },
       borderWidth: {
         1: '1px',
@@ -47,10 +48,10 @@ export default {
       },
 
       // landing colors //
-      colors: {
-        'clinic-color': '#797aec',
-        'clinic-color-bg': '#e7e8fa',
-      }
+      // colors: {
+      //   'clinic-color': '#797aec',
+      //   'clinic-color-bg': '#e7e8fa',
+      // }
     },
   },
   plugins: [],

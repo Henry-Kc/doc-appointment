@@ -8,13 +8,13 @@ body{
   font-family: "Open Sans", sans-serif;
 }
 
-:root {
+ /* :root {
   font-family: "Noto Sans JP", sans-serif;
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
   
-}
+} */
 
 .slick-prev:before, 
 .slick-next:before {

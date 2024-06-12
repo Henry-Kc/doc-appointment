@@ -14,13 +14,13 @@ import ErrorBoundary from './ErrorBoundary.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <AuthProvider>
-        <ContextProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <ContextProvider>
             <App />
-          </BrowserRouter>
-        </ContextProvider>
-      </AuthProvider>
+          </ContextProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>,
 )
