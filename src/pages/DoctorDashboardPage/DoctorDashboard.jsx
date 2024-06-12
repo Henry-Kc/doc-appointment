@@ -7,9 +7,9 @@ import { Header } from '../../components/AdminDashboardComponent';
 import { dashboardData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 
-import UserAppointments from './UserAppointments';
+import DoctorAppointments from './DoctorAppointments';
 
-const AdminDashboard = ({token}) => {
+const DoctorDashboard = ({token}) => {
   // const currentRoute = window.location.pathname; // get the current route
   // console.log(currentRoute)
   // const condition = currentRoute === '/appointments';
@@ -69,8 +69,8 @@ const AdminDashboard = ({token}) => {
       </div>
 
       
-        <Link to="/user/appointments">
-          <UserAppointments title='List of Appointments' category='' />
+        <Link to="/doctor/appointment list">
+          <DoctorAppointments title='List of Appointments' category='' />
         </Link> 
       
         
@@ -78,4 +78,4 @@ const AdminDashboard = ({token}) => {
   )
 }
 
-export default AdminDashboard
+export default DoctorDashboard

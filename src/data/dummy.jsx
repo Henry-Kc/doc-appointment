@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { MdOutlineDashboard, MdOutlineEditCalendar, MdPeopleOutline } from "react-icons/md";
+import { MdOutlineDashboard, MdOutlineEditCalendar, MdPeopleOutline, MdFormatListBulletedAdd } from "react-icons/md";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaClinicMedical } from "react-icons/fa"; 
 import { TbCalendarUp, TbCalendarPlus } from "react-icons/tb";
+import { AiFillSchedule } from "react-icons/ai";
 
 
 import { IoMdContacts } from 'react-icons/io';
 
 
-export const links = [
+export const adminlinks = [
   {
     title: 'Dashboard',
     links: [
@@ -39,6 +40,64 @@ export const links = [
         name: 'appointments',
         icon: <TbCalendarPlus />,
       },
+    ],
+  },
+  
+];
+export const userlinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'dashboard',
+        icon: <MdOutlineDashboard />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'appointments',
+        icon: <TbCalendarPlus />,
+      },
+      {
+        name: 'doctors',
+        icon: <FaUserDoctor />,
+      },
+      {
+        name: 'departments',
+        icon: <FaClinicMedical />,
+      },
+      
+    ],
+  },
+  
+];
+export const doctorlinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'dashboard',
+        icon: <MdOutlineDashboard />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'appointment list',
+        icon: <MdFormatListBulletedAdd />,
+      },
+      {
+        name: 'appointment schedule',
+        icon: <AiFillSchedule />,
+      },
+      
     ],
   },
   
@@ -685,4 +744,106 @@ export const appointmentsData = [
   },
 ] 
 
+export const doctorAppointmentsGrid = [
+  { type: 'checkbox', width: '50' },
+  { 
+    headerText: 'Appointment ID',
+    field: 'AppointmentID',
+    width: '60',
+    textAlign: 'Center',
+    isPrimaryKey: true
+  },
+  { 
+    headerText: 'Patient Name',
+    field: 'PatientName',
+    width: '120',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Patient ID',
+    field: 'PatientID',
+    width: '60',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Appointment Date',
+    field: 'AppointmentDate',
+    width: '100',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Appointment Time',
+    field: 'AppointmentTime',
+    width: '100',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Status',
+    field: 'Status',
+    width: '100',
+    textAlign: 'Center',
+    template: appointmentsGridStatus 
+  },
+  { 
+    headerText: 'Reason for Appointment',
+    field: 'ReasonForAppointment',
+    width: '100',
+    textAlign: 'Center' 
+  },
+];
+
+export const scheduledAppointmentsGrid = [
+  { type: 'checkbox', width: '50' },
+  { 
+    headerText: 'Appointment ID',
+    field: 'AppointmentID',
+    width: '60',
+    textAlign: 'Center',
+    isPrimaryKey: true
+  },
+  { 
+    headerText: 'Patient Name',
+    field: 'PatientName',
+    width: '120',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Patient ID',
+    field: 'PatientID',
+    width: '60',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Appointment Date',
+    field: 'AppointmentDate',
+    width: '100',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Appointment Time',
+    field: 'AppointmentTime',
+    width: '100',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Status',
+    field: 'Status',
+    width: '100',
+    textAlign: 'Center',
+    template: appointmentsGridStatus 
+  },
+  { 
+    headerText: 'Reason for Appointment',
+    field: 'ReasonForAppointment',
+    width: '100',
+    textAlign: 'Center' 
+  },
+  { 
+    headerText: 'Confirm Appointment',
+    field: 'ConfirmAppointment',
+    width: '100',
+    textAlign: 'Center',
+    // template: confirmAppointment 
+  },
+];
 

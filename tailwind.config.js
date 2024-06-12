@@ -48,10 +48,10 @@ export default {
       },
 
       // landing colors //
-      // colors: {
-      //   'clinic-color': '#797aec',
-      //   'clinic-color-bg': '#e7e8fa',
-      // }
+      colors: {
+        'clinic-color': '#797aec',
+        'clinic-color-bg': '#e7e8fa',
+      }
     },
   },
   plugins: [],

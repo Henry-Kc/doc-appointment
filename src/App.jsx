@@ -7,11 +7,16 @@ registerLicense('Ngo9BigBOggjHTQxAR8/V1NBaF1cXmhPYVJwWmFZfVpgfF9HZ1ZQTWYuP1ZhSXx
 
 import { LandingPage, NoPage } from './pages/LandingPage'
 import { Login, SignUp } from './pages/Authentication'
-import LandingLayout from './Layout/LandingLayout';
-import AdminLayout from './Layout/AdminLayout';
+
+
+import { LandingLayout, AdminLayout, UserLayout, DoctorLayout } from './Layout';
 
 import { Sidebar, Navbar } from './components/AdminDashboardComponent';
 import { AdminDashboard, Appointments, Departments, Doctors, Patients } from './pages/AdminDashboardPage';
+
+import { UserDashboard, UserAppointments } from './pages/UserDashboardPage';
+
+import { DoctorDashboard, DoctorAppointments, DoctorSchedule } from './pages/DoctorDashboardPage';
 
 import { useStateContext } from './contexts/ContextProvider';
 
@@ -36,9 +41,13 @@ const App = () => {
   }, [])
 
   return (
-
-
     <Routes>
+
+      <Route path={'/'} element={<LandingLayout />}>
+        <Route index element={<LandingPage />} />
+        <Route path={'/login'} element={<Login setToken={setToken} />} />
+        <Route path={'/signup'} element={<SignUp />} />
+      </Route>
 
       <Route path={'/admin'} element={<AdminLayout activemenu={activeMenu} />}>
         <Route path={'dashboard'} element={<AdminDashboard />} />
@@ -48,14 +57,20 @@ const App = () => {
         <Route path={'appointments'} element={<Appointments />} />
       </Route>
 
-      <Route path={'/'} element={<LandingLayout />}>
-        <Route index element={<LandingPage />} />
-        <Route path={'/login'} element={<Login setToken={setToken} />} />
-        <Route path={'/signup'} element={<SignUp />} />
+      <Route path={'/user'} element={<UserLayout activemenu={activeMenu} />}>
+        <Route path={'dashboard'} element={<UserDashboard />} />
+        <Route path={'doctors'} element={<Doctors />} />
+        <Route path={'departments'} element={<Departments />} />
+        <Route path={'appointments'} element={<UserAppointments />} />
+      </Route>
+
+      <Route path={'/doctor'} element={<DoctorLayout activemenu={activeMenu} />}>
+        <Route path={'dashboard'} element={<DoctorDashboard />} />
+        <Route path={'appointment schedule'} element={<DoctorSchedule />} />
+        <Route path={'appointment list'} element={<DoctorAppointments />} />
       </Route>
 
     </Routes>
-
   )
 }
 
