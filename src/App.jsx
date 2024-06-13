@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { registerLicense } from '@syncfusion/ej2-base';
@@ -11,7 +11,6 @@ import { Login, SignUp } from './pages/Authentication'
 
 import { LandingLayout, AdminLayout, UserLayout, DoctorLayout } from './Layout';
 
-import { Sidebar, Navbar } from './components/AdminDashboardComponent';
 import { AdminDashboard, Appointments, Departments, Doctors, Patients } from './pages/AdminDashboardPage';
 
 import { UserDashboard, UserAppointments } from './pages/UserDashboardPage';
@@ -19,57 +18,73 @@ import { UserDashboard, UserAppointments } from './pages/UserDashboardPage';
 import { DoctorDashboard, DoctorAppointments, DoctorSchedule } from './pages/DoctorDashboardPage';
 
 import { useStateContext } from './contexts/ContextProvider';
+import { AuthContext } from './contexts/AuthProvider';
 
 const App = () => {
 
-  const [token, setToken] = useState(false)
-  const [role, setRole] = useState(null);
-
-  const { activeMenu } = useStateContext(); //Context Menu
+  const { token, role } = useContext(AuthContext);
 
   if (token) {
     sessionStorage.setItem('token', JSON.stringify(token))
   }
 
   useEffect(() => {
-    if (sessionStorage.getItem('token')) {
-      let data = JSON.parse(sessionStorage.getItem('token'))
-      console.log(data)
-      setToken(data)
-      setRole(data.role)
+    if (token) {
+      if (role === 'admin') {
+        window.location.href = '/admin/dashboard';
+      } else if (role === 'doctor') {
+        window.location.href = '/doctor/dashboard';
+      } else {
+        window.location.href = '/user/dashboard';
+      }
     }
-  }, [])
+  }, [token, role]);
+
+  // useEffect(() => {
+  //   if (sessionStorage.getItem('token')) {
+  //     let data = JSON.parse(sessionStorage.getItem('token'))
+  //     console.log(data)
+  //     setToken(data)
+  //     setRole(data.role)
+  //   }
+  // }, [])
+
+  const { activeMenu } = useStateContext(); //Context Menu
+
 
   return (
     <Routes>
 
       <Route path={'/'} element={<LandingLayout />}>
         <Route index element={<LandingPage />} />
-        <Route path={'/login'} element={<Login setToken={setToken} />} />
+        <Route path={'/login'} element={<Login />} />
         <Route path={'/signup'} element={<SignUp />} />
       </Route>
 
-      <Route path={'/admin'} element={<AdminLayout activemenu={activeMenu} />}>
-        <Route path={'dashboard'} element={<AdminDashboard />} />
-        <Route path={'patients'} element={<Patients />} />
-        <Route path={'doctors'} element={<Doctors />} />
-        <Route path={'departments'} element={<Departments />} />
-        <Route path={'appointments'} element={<Appointments />} />
-      </Route>
-
-      <Route path={'/user'} element={<UserLayout activemenu={activeMenu} />}>
-        <Route path={'dashboard'} element={<UserDashboard />} />
-        <Route path={'doctors'} element={<Doctors />} />
-        <Route path={'departments'} element={<Departments />} />
-        <Route path={'appointments'} element={<UserAppointments />} />
-      </Route>
-
-      <Route path={'/doctor'} element={<DoctorLayout activemenu={activeMenu} />}>
-        <Route path={'dashboard'} element={<DoctorDashboard />} />
-        <Route path={'appointment schedule'} element={<DoctorSchedule />} />
-        <Route path={'appointment list'} element={<DoctorAppointments />} />
-      </Route>
-
+      {/* {token && role === 'admin' ? ( */}
+        <Route path={'/admin'} element={<AdminLayout activemenu={activeMenu} />}>
+          <Route path={'dashboard'} element={<AdminDashboard />} />
+          <Route path={'patients'} element={<Patients />} />
+          <Route path={'doctors'} element={<Doctors />} />
+          <Route path={'departments'} element={<Departments />} />
+          <Route path={'appointments'} element={<Appointments />} />
+        </Route>
+      {/* ) : token && role === 'user' ? ( */}
+        <Route path={'/user'} element={<UserLayout activemenu={activeMenu} />}>
+          <Route path={'dashboard'} element={<UserDashboard />} />
+          <Route path={'doctors'} element={<Doctors />} />
+          <Route path={'departments'} element={<Departments />} />
+          <Route path={'appointments'} element={<UserAppointments />} />
+        </Route>
+      {/* ) : token && role === 'doctor' ? ( */}
+        <Route path={'/doctor'} element={<DoctorLayout activemenu={activeMenu} />}>
+          <Route path={'dashboard'} element={<DoctorDashboard />} />
+          <Route path={'appointment schedule'} element={<DoctorSchedule />} />
+          <Route path={'appointment list'} element={<DoctorAppointments />} />
+        </Route>
+      {/* ) : ( */}
+        <Route path="*" element={<NoPage />} />
+      {/* )} */}
     </Routes>
   )
 }

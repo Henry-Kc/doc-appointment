@@ -7,12 +7,15 @@ import tailwindcss from 'tailwindcss';
 export default defineConfig({
   plugins: [
     react(), 
-    // svgr({ 
-    //   svgrOptions: {
-    //     // svgr options
-    //   },
-    // }),
+    svgr({ 
+      svgrOptions: {
+        // svgr options
+      },
+    }),
   ],
+  build: {
+    assetsDir: 'src/assets',
+  },
   esbuild: {
     jsx: 'transform', // enable JSX support in.js files
   },

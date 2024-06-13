@@ -8,7 +8,7 @@ import { supabase } from '../../client'
 import { AuthContext } from '../../contexts/AuthProvider';
 
 
-const Login = ({ setToken }) => {
+const Login = () => {
   // const [formData, setformData] = useState({
   //   email: '', password: '',
   // })
@@ -51,20 +51,33 @@ const Login = ({ setToken }) => {
   //   }
   // }
 
-  const { login, showPass, passwordHandler } = useContext(AuthContext);
+  const { login, role, showPass, passwordHandler } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
+  if (!login) {
+    console.error('Login function is not defined');
+    return <div>Error: Login function is not defined</div>;
+  }
+
   const handleChange = (event) => {
+    console.log(`Login ${event.target.name}: ${event.target.value}`);
     setFormData((prevFormData) => ({...prevFormData, [event.target.name]: event.target.value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await login(formData.email, formData.password);
-    if (login) {
-      navigate(`/${role}`); // Redirect to the corresponding dashboard based on the role
+    console.log('handleSubmit called');
+    try {
+      await login(formData.email, formData.password);
+      navigate(`/${role}/dashboard`);
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Error logging in. Please try again.');
     }
+    // if (login) {
+    //   navigate(`/${role}/dashboard`); // Redirect to the corresponding dashboard based on the role
+    // }
   };
 
 

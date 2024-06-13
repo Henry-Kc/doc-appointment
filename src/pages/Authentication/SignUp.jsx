@@ -62,14 +62,28 @@ const SignUp = () => {
   const [formData, setFormData] = useState({ fullName: '', email: '', password: '' });
   const navigate = useNavigate();
 
+  if (!signup) {
+    console.error('Signup function is not defined');
+    return <div>Error: Signup function is not defined</div>;
+  }
+
   const handleChange = (event) => {
+    console.log(`Typing in ${event.target.name}: ${event.target.value}`);
     setFormData((prevFormData) => ({...prevFormData, [event.target.name]: event.target.value }));
+    // console.log("Updated formData:", prevFormData);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await signup(formData.fullName, formData.email, formData.password);
-    navigate('/login');
+    console.log('handleSubmit called');
+    try {
+      await signup(formData.fullName, formData.email, formData.password);
+      console.log('whats going on')
+      navigate('/login');
+    } catch (error) {
+      console.error('Error signing up:', error);
+      alert('Error signing up. Please try again.');
+    }
   };
 
   return (

@@ -8,8 +8,8 @@ const initialState = {
 }
 
 export const ContextProvider = ({children}) => {
-  const [activeMenu, setActiveMenu] = useState(true)
-  const [isClicked, setIsClicked] = useState(initialState)
+  const [activeMenu, setActiveMenu] = useState(true) //Fpr Sidebar
+  const [isClicked, setIsClicked] = useState(initialState) //For user Profile
   const [screenSize, setScreenSize] = useState(undefined)
 
   const handleClick = (clicked) => {
