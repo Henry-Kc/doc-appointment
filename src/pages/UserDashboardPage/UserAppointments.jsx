@@ -14,7 +14,7 @@ const UserAppointments = ({category, title}) => {
   const condition = currentRoute === '/user/appointments';
 
   return (
-    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+    <div className="m-2 md:m-10 mt-2 p-2 md:p-10 bg-white rounded-3xl">
       <Header title={condition? 'Appointments' : title} category={condition? 'Page' : category}/>
       <GridComponent
         dataSource={appointmentsData}

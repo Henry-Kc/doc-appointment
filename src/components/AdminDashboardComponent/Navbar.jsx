@@ -65,20 +65,20 @@ const Navbar = () => {
         color='black'
         icon={<RiMenuFoldFill />}
       />
-      {/* <NavButton
-        title='Logout'
-        onClick={handleLogout}
-        color='text-red-600'
-        icon={<TbLayoutSidebarLeftCollapse />}
-      /> */}
 
-      <div className='Notifications'>
+      <div className='flex items-center'>
+        <button 
+          type="button" 
+          className=' mr-10 inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-1 text-center font-medium text-white hover:bg-indigo-600'
+        >
+          Log Out
+        </button>
         <TooltipComponent content='Profile' position='BottomCenter'>
           <div
             className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg'
             onClick={() => handleClick('userProfile')}
           >
-
+            
 
             <img src='https://cdn1.vectorstock.com/i/1000x1000/94/10/person-icon-flat-people-symbol-vector-24259410.jpg' alt="profile_img" className='rounded-full w-8 h-8' />
             <p>

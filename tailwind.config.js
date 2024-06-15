@@ -44,7 +44,7 @@ export default {
       },
       backgroundImage: {
         'hero-pattern':
-          "url('https://i.ibb.co/MkvLDfb/Rectangle-4389.png')",
+          "url(/assets/heroImg.svg)",
       },
 
       // landing colors //
